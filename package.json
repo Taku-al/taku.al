@@ -1,0 +1,57 @@
+{
+  "name": "taku",
+  "version": "1.0.0",
+  "description": "A booking system with API, Web, and Mobile apps",
+  "private": true,
+  "workspaces": [
+    "api",
+    "web",
+    "mobile",
+    "shared"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev:api\" \"npm run dev:web\"",
+    "dev:api": "cd api && npm run dev",
+    "dev:web": "cd web && npm start",
+    "dev:mobile": "cd mobile && npm start",
+    "build": "npm run build:shared && npm run build:api && npm run build:web",
+    "build:shared": "cd shared && npm run build",
+    "build:api": "cd api && npm run build",
+    "build:web": "cd web && npm run build",
+    "build:mobile": "cd mobile && npm run build",
+    "test": "npm run test:api && npm run test:web",
+    "test:api": "cd api && npm test",
+    "test:web": "cd web && npm test",
+    "test:mobile": "cd mobile && npm test",
+    "migrate": "cd api && npm run migrate",
+    "clean": "npm run clean:node_modules && npm run clean:build",
+    "clean:node_modules": "find . -name 'node_modules' -type d -prune -exec rm -rf '{}' +",
+    "clean:build": "find . -name 'dist' -o -name 'build' -type d -prune -exec rm -rf '{}' +",
+    "version:patch": "npm version patch --workspaces && git add . && git commit -m \"chore: bump version\" && git tag -a \"v$(node -p \"require('./package.json').version\")\" -m \"Release v$(node -p \"require('./package.json').version\")\"",
+    "version:minor": "npm version minor --workspaces && git add . && git commit -m \"chore: bump version\" && git tag -a \"v$(node -p \"require('./package.json').version\")\" -m \"Release v$(node -p \"require('./package.json').version\")\"",
+    "version:major": "npm version major --workspaces && git add . && git commit -m \"chore: bump version\" && git tag -a \"v$(node -p \"require('./package.json').version\")\" -m \"Release v$(node -p \"require('./package.json').version\")\"",
+    "status": "echo \"Current version: $(node -p \"require('./package.json').version\")\" && echo \"API version: $(node -p \"require('./api/package.json').version\")\" && echo \"Web version: $(node -p \"require('./web/package.json').version\")\" && echo \"Shared version: $(node -p \"require('./shared/package.json').version\")\"",
+    "deploy:dev": "./scripts/deploy-dev.sh"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Taku-al/taku.al.git"
+  },
+  "keywords": [
+    "booking",
+    "appointment",
+    "react",
+    "react-native",
+    "fastify",
+    "typescript"
+  ],
+  "author": "KIER",
+  "license": "MIT"
+} 
