@@ -12,7 +12,7 @@
   "scripts": {
     "dev": "concurrently \"npm run dev:api\" \"npm run dev:web\"",
     "dev:api": "cd api && npm run dev",
-    "dev:web": "cd web && npm start",
+    "dev:web": "cd web && npm run dev",
     "dev:mobile": "cd mobile && npm start",
     "build": "npm run build:shared && npm run build:api && npm run build:web",
     "build:shared": "cd shared && npm run build",
