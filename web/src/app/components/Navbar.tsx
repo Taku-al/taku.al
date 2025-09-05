@@ -26,30 +26,32 @@ export default function Navbar() {
                 <div className="flex justify-between items-center h-16">
                     {/* Logo */}
                     <div className="flex-shrink-0">
-                        <h1 className={`text-2xl font-bold transition-colors duration-300 ${
-                            isScrolled ? 'text-blue-600' : 'text-white'
-                        }`} style={{ color: isScrolled ? '#3e92cc' : '#ffffff' }}>Taku.al</h1>
+                        <a href="/">
+                            <h1 className={`text-2xl font-bold transition-colors duration-300 ${
+                                isScrolled ? 'text-blue-600' : 'text-white'
+                            }`} style={{ color: isScrolled ? '#3e92cc' : '#ffffff' }}>Taku.al</h1>
+                        </a>
                     </div>
 
                     {/* Desktop Navigation */}
                     <div className="hidden md:block">
                         <div className="ml-10 flex items-baseline space-x-8">
-                            <a href="#home" className={`hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300 ${
+                            <a href="/#home" className={`hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300 ${
                                 isScrolled ? 'text-gray-700 hover:text-blue-600' : 'text-white hover:text-blue-200'
                             }`}>
                                 Home
                             </a>
-                            <a href="#services" className={`hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300 ${
+                            <a href="/#services" className={`hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300 ${
                                 isScrolled ? 'text-gray-700 hover:text-blue-600' : 'text-white hover:text-blue-200'
                             }`}>
                                 Services
                             </a>
-                            <a href="#about" className={`hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300 ${
+                            <a href="/#about" className={`hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300 ${
                                 isScrolled ? 'text-gray-700 hover:text-blue-600' : 'text-white hover:text-blue-200'
                             }`}>
                                 About
                             </a>
-                            <a href="#contact" className={`hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300 ${
+                            <a href="/#contact" className={`hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300 ${
                                 isScrolled ? 'text-gray-700 hover:text-blue-600' : 'text-white hover:text-blue-200'
                             }`}>
                                 Contact
@@ -57,8 +59,15 @@ export default function Navbar() {
                         </div>
                     </div>
 
-                    {/* CTA Button */}
-                    <div className="hidden md:block">
+                    {/* Auth & CTA Buttons */}
+                    <div className="hidden md:flex items-center space-x-4">
+                        <a href="/auth" className={`px-4 py-2 rounded-lg font-medium transition-all duration-300 hover:opacity-90 ${
+                            isScrolled
+                                ? 'text-gray-700 hover:text-blue-600'
+                                : 'text-white hover:text-blue-200'
+                        }`}>
+                            Sign In
+                        </a>
                         <button className={`px-6 py-2 rounded-lg font-medium transition-all duration-300 hover:opacity-90 ${
                             isScrolled
                                 ? 'bg-blue-600 text-white hover:bg-blue-700'
@@ -98,25 +107,30 @@ export default function Navbar() {
                                 ? 'bg-white border-gray-200'
                                 : 'bg-black bg-opacity-20 backdrop-blur-sm border-white border-opacity-20'
                         }`}>
-                            <a href="#home" className={`block px-3 py-2 rounded-md text-base font-medium hover:opacity-80 transition-colors ${
+                            <a href="/#home" className={`block px-3 py-2 rounded-md text-base font-medium hover:opacity-80 transition-colors ${
                                 isScrolled ? 'text-gray-700' : 'text-white'
                             }`}>
                                 Home
                             </a>
-                            <a href="#services" className={`block px-3 py-2 rounded-md text-base font-medium hover:opacity-80 transition-colors ${
+                            <a href="/#services" className={`block px-3 py-2 rounded-md text-base font-medium hover:opacity-80 transition-colors ${
                                 isScrolled ? 'text-gray-700' : 'text-white'
                             }`}>
                                 Services
                             </a>
-                            <a href="#about" className={`block px-3 py-2 rounded-md text-base font-medium hover:opacity-80 transition-colors ${
+                            <a href="/#about" className={`block px-3 py-2 rounded-md text-base font-medium hover:opacity-80 transition-colors ${
                                 isScrolled ? 'text-gray-700' : 'text-white'
                             }`}>
                                 About
                             </a>
-                            <a href="#contact" className={`block px-3 py-2 rounded-md text-base font-medium hover:opacity-80 transition-colors ${
+                            <a href="/#contact" className={`block px-3 py-2 rounded-md text-base font-medium hover:opacity-80 transition-colors ${
                                 isScrolled ? 'text-gray-700' : 'text-white'
                             }`}>
                                 Contact
+                            </a>
+                            <a href="/auth" className={`block px-3 py-2 rounded-md text-base font-medium hover:opacity-80 transition-colors ${
+                                isScrolled ? 'text-gray-700' : 'text-white'
+                            }`}>
+                                Sign In
                             </a>
                             <div className="pt-4">
                                 <button className={`w-full px-6 py-2 rounded-lg font-medium transition-all duration-300 hover:opacity-90 ${
