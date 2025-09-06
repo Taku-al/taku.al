@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { Menu, X } from 'lucide-react';
 
 export default function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -19,114 +20,97 @@ export default function Navbar() {
     return (
         <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${
             isScrolled
-                ? 'bg-white shadow-lg'
-                : 'bg-transparent'
+                ? 'bg-white/95 backdrop-blur-md shadow-lg'
+                : 'bg-transparent backdrop-blur-md'
         }`}>
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-7xl mx-auto px-6 lg:px-8">
                 <div className="flex justify-between items-center h-16">
                     {/* Logo */}
                     <div className="flex-shrink-0">
                         <h1 className={`text-2xl font-bold transition-colors duration-300 ${
                             isScrolled ? 'text-blue-600' : 'text-white'
-                        }`} style={{ color: isScrolled ? '#3e92cc' : '#ffffff' }}>Taku.al</h1>
+                        }`}>Taku.al</h1>
                     </div>
 
-                    {/* Desktop Navigation */}
-                    <div className="hidden md:block">
-                        <div className="ml-10 flex items-baseline space-x-8">
-                            <a href="#home" className={`hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300 ${
-                                isScrolled ? 'text-gray-700 hover:text-blue-600' : 'text-white hover:text-blue-200'
-                            }`}>
-                                Home
-                            </a>
-                            <a href="#services" className={`hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300 ${
-                                isScrolled ? 'text-gray-700 hover:text-blue-600' : 'text-white hover:text-blue-200'
-                            }`}>
-                                Services
-                            </a>
-                            <a href="#about" className={`hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300 ${
-                                isScrolled ? 'text-gray-700 hover:text-blue-600' : 'text-white hover:text-blue-200'
-                            }`}>
-                                About
-                            </a>
-                            <a href="#contact" className={`hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300 ${
-                                isScrolled ? 'text-gray-700 hover:text-blue-600' : 'text-white hover:text-blue-200'
-                            }`}>
-                                Contact
-                            </a>
-                        </div>
+                    {/* Desktop Navigation - Perfectly Centered */}
+                    <div className="hidden lg:flex items-center space-x-8">
+                        <a href="#home" className={`px-4 py-2 text-sm font-medium transition-all duration-300 relative hover-underline ${
+                            isScrolled ? 'text-gray-700 hover:text-blue-600' : 'text-white hover:text-blue-200'
+                        }`}>
+                            Home
+                        </a>
+                        <a href="#services" className={`px-4 py-2 text-sm font-medium transition-all duration-300 relative hover-underline ${
+                            isScrolled ? 'text-gray-700 hover:text-blue-600' : 'text-white hover:text-blue-200'
+                        }`}>
+                            Services
+                        </a>
+                        <a href="#near-me" className={`px-4 py-2 text-sm font-medium transition-all duration-300 relative hover-underline ${
+                            isScrolled ? 'text-gray-700 hover:text-blue-600' : 'text-white hover:text-blue-200'
+                        }`}>
+                            Near Me
+                        </a>
+                        <a href="#contact" className={`px-4 py-2 text-sm font-medium transition-all duration-300 relative hover-underline ${
+                            isScrolled ? 'text-gray-700 hover:text-blue-600' : 'text-white hover:text-blue-200'
+                        }`}>
+                            Contact
+                        </a>
                     </div>
 
-                    {/* CTA Button */}
-                    <div className="hidden md:block">
-                        <button className={`px-6 py-2 rounded-lg font-medium transition-all duration-300 hover:opacity-90 ${
-                            isScrolled
-                                ? 'bg-blue-600 text-white hover:bg-blue-700'
-                                : 'bg-white text-blue-600 hover:bg-gray-100'
-                        }`} style={{
-                            backgroundColor: isScrolled ? '#3e92cc' : '#ffffff',
-                            color: isScrolled ? '#ffffff' : '#3e92cc'
-                        }}>
+                    {/* Right side - Book Now */}
+                    <div className="hidden lg:flex items-center">
+                        <button className="cursor-pointer bg-gradient-to-b from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl">
                             Book Now
                         </button>
                     </div>
 
                     {/* Mobile menu button */}
-                    <div className="md:hidden">
+                    <div className="lg:hidden">
                         <button
                             onClick={() => setIsMenuOpen(!isMenuOpen)}
-                            className={`hover:opacity-80 focus:outline-none transition-colors duration-300 ${
-                                isScrolled ? 'text-gray-700' : 'text-white'
+                            className={`p-2 rounded-lg transition-colors duration-300 ${
+                                isScrolled ? 'text-gray-700 hover:bg-gray-100' : 'text-white hover:bg-white/10'
                             }`}
                         >
-                            <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                {isMenuOpen ? (
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                                ) : (
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                                )}
-                            </svg>
+                            {isMenuOpen ? (
+                                <X className="h-5 w-5" />
+                            ) : (
+                                <Menu className="h-5 w-5" />
+                            )}
                         </button>
                     </div>
                 </div>
 
                 {/* Mobile Navigation */}
                 {isMenuOpen && (
-                    <div className="md:hidden">
-                        <div className={`px-2 pt-2 pb-3 space-y-1 sm:px-3 border-t transition-all duration-300 ${
+                    <div className="lg:hidden">
+                        <div className={`px-4 py-4 space-y-2 border-t transition-all duration-300 ${
                             isScrolled
-                                ? 'bg-white border-gray-200'
-                                : 'bg-black bg-opacity-20 backdrop-blur-sm border-white border-opacity-20'
+                                ? 'bg-white/95 border-gray-200'
+                                : 'bg-black/20 backdrop-blur-md border-white/20'
                         }`}>
-                            <a href="#home" className={`block px-3 py-2 rounded-md text-base font-medium hover:opacity-80 transition-colors ${
-                                isScrolled ? 'text-gray-700' : 'text-white'
+                            <a href="#home" className={`block px-4 py-3 rounded-lg text-base font-medium transition-colors ${
+                                isScrolled ? 'text-gray-700 hover:bg-gray-100' : 'text-white hover:bg-white/10'
                             }`}>
                                 Home
                             </a>
-                            <a href="#services" className={`block px-3 py-2 rounded-md text-base font-medium hover:opacity-80 transition-colors ${
-                                isScrolled ? 'text-gray-700' : 'text-white'
+                            <a href="#services" className={`block px-4 py-3 rounded-lg text-base font-medium transition-colors ${
+                                isScrolled ? 'text-gray-700 hover:bg-gray-100' : 'text-white hover:bg-white/10'
                             }`}>
                                 Services
                             </a>
-                            <a href="#about" className={`block px-3 py-2 rounded-md text-base font-medium hover:opacity-80 transition-colors ${
-                                isScrolled ? 'text-gray-700' : 'text-white'
+                            <a href="#near-me" className={`block px-4 py-3 rounded-lg text-base font-medium transition-colors ${
+                                isScrolled ? 'text-gray-700 hover:bg-gray-100' : 'text-white hover:bg-white/10'
                             }`}>
-                                About
+                                Near Me
                             </a>
-                            <a href="#contact" className={`block px-3 py-2 rounded-md text-base font-medium hover:opacity-80 transition-colors ${
-                                isScrolled ? 'text-gray-700' : 'text-white'
+                            <a href="#contact" className={`block px-4 py-3 rounded-lg text-base font-medium transition-colors ${
+                                isScrolled ? 'text-gray-700 hover:bg-gray-100' : 'text-white hover:bg-white/10'
                             }`}>
                                 Contact
                             </a>
+                            
                             <div className="pt-4">
-                                <button className={`w-full px-6 py-2 rounded-lg font-medium transition-all duration-300 hover:opacity-90 ${
-                                    isScrolled
-                                        ? 'bg-blue-600 text-white hover:bg-blue-700'
-                                        : 'bg-white text-blue-600 hover:bg-gray-100'
-                                }`} style={{
-                                    backgroundColor: isScrolled ? '#3e92cc' : '#ffffff',
-                                    color: isScrolled ? '#ffffff' : '#3e92cc'
-                                }}>
+                                <button className="cursor-pointer w-full bg-gradient-to-b from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-6 py-3 rounded-full text-base font-semibold transition-all duration-300 shadow-lg">
                                     Book Now
                                 </button>
                             </div>
@@ -137,6 +121,3 @@ export default function Navbar() {
         </nav>
     );
 }
-
-
-

@@ -1,5 +1,6 @@
 import Hero from './components/Hero';
 import Services from './components/Services';
+import NearMe from './components/NearMe';
 import Footer from './components/Footer';
 
 export default function Home() {
@@ -7,6 +8,7 @@ export default function Home() {
         <div className="min-h-screen">
             <Hero />
             <Services />
+            <NearMe />
             <Footer />
         </div>
     );
