@@ -2,6 +2,7 @@
 
 import { Calendar, Users, MapPin, CheckCircle } from 'lucide-react';
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 
 // Animated Counter Component
 function AnimatedCounter({ end, duration = 2000 }: { end: number; duration?: number }) {
@@ -59,47 +60,41 @@ export default function Hero() {
                         Book your perfect haircut, salon treatment, or spa experience with our professional beauty experts.
                     </p>
 
-                    {/* Single Primary CTA */}
+                    {/* Primary CTA */}
                     <div className="flex justify-center mb-16">
-                        <button className="cursor-pointer group bg-gradient-to-b from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-10 py-5 rounded-full text-xl font-semibold transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl flex items-center gap-3">
+                        <Link href="/dashboard/providers" className="inline-flex items-center justify-center px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white text-base font-medium rounded-md transition-colors duration-200 shadow-sm hover:shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
                             <Calendar className="w-6 h-6" />
                             Book Your Appointment
-                        </button>
+                        </Link>
                     </div>
 
-                    {/* Trust Badges - Now with 3 badges including animated counter */}
+                    {/* Stats */}
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
                         <div className="flex flex-col items-center space-y-4">
-                            <div className="w-20 h-20 bg-blue-600/20 rounded-full flex items-center justify-center">
-                                <Users className="w-10 h-10 text-blue-400" />
+                            <div className="w-16 h-16 bg-blue-600/20 rounded-lg flex items-center justify-center">
+                                <Users className="w-8 h-8 text-blue-400" />
                             </div>
                             <div>
-                                <div className="text-4xl font-bold text-blue-400">
-                                    <AnimatedCounter end={1000} />
-                                </div>
-                                <div className="text-gray-300 text-lg">Happy Clients</div>
+                                <div className="text-3xl font-bold text-blue-400">1,000+</div>
+                                <div className="text-gray-300">Happy Clients</div>
                             </div>
                         </div>
                         <div className="flex flex-col items-center space-y-4">
-                            <div className="w-20 h-20 bg-blue-600/20 rounded-full flex items-center justify-center">
-                                <MapPin className="w-10 h-10 text-blue-400" />
+                            <div className="w-16 h-16 bg-blue-600/20 rounded-lg flex items-center justify-center">
+                                <MapPin className="w-8 h-8 text-blue-400" />
                             </div>
                             <div>
-                                <div className="text-4xl font-bold text-blue-400">
-                                    <AnimatedCounter end={50} />
-                                </div>
-                                <div className="text-gray-300 text-lg">Local Businesses</div>
+                                <div className="text-3xl font-bold text-blue-400">50+</div>
+                                <div className="text-gray-300">Local Businesses</div>
                             </div>
                         </div>
                         <div className="flex flex-col items-center space-y-4">
-                            <div className="w-20 h-20 bg-blue-600/20 rounded-full flex items-center justify-center">
-                                <CheckCircle className="w-10 h-10 text-blue-400" />
+                            <div className="w-16 h-16 bg-blue-600/20 rounded-lg flex items-center justify-center">
+                                <CheckCircle className="w-8 h-8 text-blue-400" />
                             </div>
                             <div>
-                                <div className="text-4xl font-bold text-blue-400">
-                                    <AnimatedCounter end={2500} duration={2500} />
-                                </div>
-                                <div className="text-gray-300 text-lg">Services Completed</div>
+                                <div className="text-3xl font-bold text-blue-400">2,500+</div>
+                                <div className="text-gray-300">Services Completed</div>
                             </div>
                         </div>
                     </div>
