@@ -1,60 +1,62 @@
 import { MapPin, Star, Calendar } from 'lucide-react';
+import Link from 'next/link';
 
 export default function NearMe() {
+    // Use real provider data from dashboard
     const nearbyBusinesses = [
         {
             id: 1,
-            name: "Elegant Hair Studio",
-            category: "Hair Salon",
-            rating: 4.8,
-            distance: "0.3 km",
-            image: "/api/placeholder/300/200",
-            reviews: 124
+            name: "Bella's Spa & Wellness",
+            category: "Spa",
+            rating: 4.9,
+            distance: "0.3 miles",
+            image: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
+            reviews: 245
         },
         {
             id: 2,
-            name: "Gentleman's Barber",
+            name: "Mike's Modern Barbershop",
             category: "Barbershop",
-            rating: 4.9,
-            distance: "0.7 km",
-            image: "/api/placeholder/300/200",
-            reviews: 89
+            rating: 4.8,
+            distance: "0.8 miles",
+            image: "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+            reviews: 189
         },
         {
             id: 3,
-            name: "Zen Wellness Spa",
-            category: "Spa",
+            name: "Sarah's Hair Studio",
+            category: "Hair Salon",
             rating: 4.7,
-            distance: "1.2 km",
-            image: "/api/placeholder/300/200",
+            distance: "1.2 miles",
+            image: "https://images.unsplash.com/photo-1560066984-138dadb4c035?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
             reviews: 156
         },
         {
             id: 4,
-            name: "Nail Art Studio",
+            name: "Zen Nail Lounge",
             category: "Nail Salon",
             rating: 4.6,
-            distance: "0.8 km",
-            image: "/api/placeholder/300/200",
-            reviews: 67
-        },
-        {
-            id: 5,
-            name: "Bliss Beauty Center",
-            category: "Beauty Clinic",
-            rating: 4.8,
-            distance: "1.5 km",
-            image: "/api/placeholder/300/200",
+            distance: "2.1 miles",
+            image: "https://images.unsplash.com/photo-1604654894610-df63bc536371?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
             reviews: 203
         },
         {
+            id: 5,
+            name: "Elite Fitness & Wellness",
+            category: "Fitness",
+            rating: 4.8,
+            distance: "1.5 miles",
+            image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+            reviews: 312
+        },
+        {
             id: 6,
-            name: "Serenity Massage",
-            category: "Massage Therapy",
+            name: "The Beauty Bar",
+            category: "Beauty Salon",
             rating: 4.9,
-            distance: "0.9 km",
-            image: "/api/placeholder/300/200",
-            reviews: 178
+            distance: "0.6 miles",
+            image: "https://images.unsplash.com/photo-1487412912498-0447578fcca8?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+            reviews: 278
         }
     ];
 
@@ -79,12 +81,16 @@ export default function NearMe() {
                     {nearbyBusinesses.map((business) => (
                         <div
                             key={business.id}
-                            className="group bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 overflow-hidden"
+                            className="bg-white rounded-lg border border-gray-200 hover:border-blue-300 hover:shadow-lg transition-all overflow-hidden"
                         >
                             {/* Business Image */}
-                            <div className="relative h-48 bg-gradient-to-br from-blue-100 to-blue-200 overflow-hidden">
-                                <div className="absolute inset-0 bg-gradient-to-br from-blue-400/20 to-blue-600/20"></div>
-                                <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1 flex items-center gap-1">
+                            <div className="relative h-48 overflow-hidden">
+                                <img 
+                                    src={business.image} 
+                                    alt={business.name}
+                                    className="w-full h-full object-cover"
+                                />
+                                <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-lg px-3 py-1 flex items-center gap-1 border border-gray-200">
                                     <MapPin className="w-4 h-4 text-blue-600" />
                                     <span className="text-sm font-semibold text-gray-700">{business.distance}</span>
                                 </div>
@@ -92,11 +98,9 @@ export default function NearMe() {
 
                             {/* Business Info */}
                             <div className="p-6">
-                                <div className="flex items-start justify-between mb-3">
-                                    <div>
-                                        <h3 className="text-xl font-bold text-gray-900 mb-1">{business.name}</h3>
-                                        <p className="text-blue-600 font-medium">{business.category}</p>
-                                    </div>
+                                <div className="mb-3">
+                                    <h3 className="text-xl font-bold text-gray-900 mb-1">{business.name}</h3>
+                                    <p className="text-blue-600 font-medium">{business.category}</p>
                                 </div>
 
                                 {/* Rating */}
@@ -117,22 +121,28 @@ export default function NearMe() {
                                     <span className="text-gray-500">({business.reviews} reviews)</span>
                                 </div>
 
-                                {/* Book Button - Changed from "View" to "Book" */}
-                                <button className="cursor-pointer w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white py-3 rounded-xl font-semibold transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2">
+                                {/* Book Button */}
+                                <Link 
+                                    href={`/dashboard/book/${business.id}`}
+                                    className="inline-flex items-center justify-center w-full px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-md transition-colors duration-200 shadow-sm hover:shadow focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 gap-2"
+                                >
                                     <Calendar className="w-4 h-4" />
                                     Book Now
-                                </button>
+                                </Link>
                             </div>
                         </div>
                     ))}
                 </div>
 
-                {/* Simplified CTA Section - Single button */}
+                {/* CTA Section */}
                 <div className="text-center mt-12">
                     <p className="text-gray-600 mb-6">Looking for more options in your area?</p>
-                    <button className="cursor-pointer bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 hover:scale-105 shadow-lg">
+                    <Link 
+                        href="/dashboard/providers"
+                        className="inline-flex items-center justify-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white text-base font-medium rounded-md transition-colors duration-200 shadow-sm hover:shadow focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                    >
                         View All Businesses
-                    </button>
+                    </Link>
                 </div>
             </div>
         </section>

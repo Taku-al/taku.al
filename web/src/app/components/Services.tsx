@@ -1,4 +1,5 @@
 import { Scissors, Brush, Sparkles, Heart, Hand, Grid3x3, Waves, Users } from 'lucide-react';
+import Link from 'next/link';
 
 export default function Services() {
     // Simplified to 5 core business types
@@ -65,62 +66,65 @@ export default function Services() {
             <div className="max-w-6xl mx-auto px-4 sm:px-6 mb-16">
                 <div className="grid grid-cols-2 md:flex md:flex-wrap justify-center gap-4">
                     {categories.map((category) => (
-                        <button
+                        <Link
                             key={category.id}
-                            className="cursor-pointer group flex flex-col md:flex-row items-center gap-2 md:gap-3 p-4 md:px-6 md:py-4 rounded-xl transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
-                            style={{ backgroundColor: '#ffffff' }}
+                            href={`/dashboard/providers?category=${encodeURIComponent(category.name.replace('& ', ''))}`}
+                            className="flex flex-col md:flex-row items-center gap-2 md:gap-3 p-4 md:px-6 md:py-4 bg-white rounded-lg border border-gray-200 hover:border-blue-300 hover:shadow-md transition-colors"
                         >
                             <category.icon className="w-6 h-6 md:w-8 md:h-8 text-blue-600" />
                             <div className="text-center md:text-left">
-                                <div className="font-semibold text-sm md:text-base" style={{ color: '#1E1E1E' }}>{category.name}</div>
-                                <div className="text-xs md:text-sm" style={{ color: '#9a9696' }}>{category.count} categories</div>
+                                <div className="font-semibold text-sm md:text-base text-gray-900">{category.name}</div>
+                                <div className="text-xs md:text-sm text-gray-600">{category.count} categories</div>
                             </div>
-                        </button>
+                        </Link>
                     ))}
                 </div>
             </div>
 
-            {/* Business Types Grid - Single section only */}
+            {/* Business Types Grid */}
             <div className="max-w-7xl mx-auto px-4 sm:px-6 mb-16">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {businessTypes.map((business) => (
                         <div
                             key={business.id}
-                            className="group relative overflow-hidden rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-105"
-                            style={{ backgroundColor: '#ffffff' }}
+                            className="bg-white rounded-lg border border-gray-200 hover:border-blue-300 hover:shadow-lg transition-all p-8"
                         >
-                            <div className="p-8">
-                                <div className="w-20 h-20 mb-6 bg-blue-50 rounded-2xl flex items-center justify-center">
-                                    <business.icon className="w-10 h-10 text-blue-600" />
-                                </div>
-                                <h3 className="text-xl md:text-2xl font-bold mb-4" style={{ color: '#1E1E1E' }}>
-                                    {business.title}
-                                </h3>
-                                <p className="text-base md:text-lg mb-6 leading-relaxed" style={{ color: '#9a9696' }}>
-                                    {business.description}
-                                </p>
-                                <button className="cursor-pointer w-full py-4 px-6 rounded-xl text-lg font-semibold transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl" style={{ backgroundColor: '#3e92cc', color: '#ffffff' }}>
-                                    Explore Services
-                                </button>
+                            <div className="w-16 h-16 mb-6 bg-blue-100 rounded-lg flex items-center justify-center">
+                                <business.icon className="w-8 h-8 text-blue-600" />
                             </div>
+                            <h3 className="text-xl font-bold mb-4 text-gray-900">
+                                {business.title}
+                            </h3>
+                            <p className="text-gray-600 mb-6 leading-relaxed">
+                                {business.description}
+                            </p>
+                            <Link 
+                                href="/dashboard/providers"
+                                className="inline-flex items-center justify-center w-full px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-md transition-colors duration-200 shadow-sm hover:shadow focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                            >
+                                Explore Services
+                            </Link>
                         </div>
                     ))}
                 </div>
             </div>
 
-            {/* Single CTA Section */}
+            {/* CTA Section */}
             <div className="max-w-3xl mx-auto px-4 sm:px-6">
                 <div className="text-center">
-                    <div className="rounded-3xl shadow-2xl p-12" style={{ backgroundColor: '#ffffff' }}>
-                        <h3 className="text-3xl font-bold mb-6" style={{ color: '#1E1E1E' }}>
+                    <div className="bg-white rounded-lg border border-gray-200 p-12">
+                        <h3 className="text-3xl font-bold mb-6 text-gray-900">
                             Ready to Book Your Appointment?
                         </h3>
-                        <p className="text-lg mb-8 leading-relaxed" style={{ color: '#9a9696' }}>
+                        <p className="text-lg mb-8 leading-relaxed text-gray-600">
                             Discover amazing local businesses and book with trusted professionals.
                         </p>
-                        <button className="cursor-pointer px-8 py-4 rounded-2xl text-lg font-semibold transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl" style={{ backgroundColor: '#3e92cc', color: '#ffffff' }}>
+                        <Link 
+                            href="/dashboard/providers"
+                            className="inline-flex items-center justify-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white text-base font-medium rounded-md transition-colors duration-200 shadow-sm hover:shadow focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                        >
                             Get Started
-                        </button>
+                        </Link>
                     </div>
                 </div>
             </div>
