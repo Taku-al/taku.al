@@ -113,7 +113,7 @@ export default function BookingPage() {
         if (params.id) {
             const providerId = parseInt(params.id as string);
             const foundProvider = getProviderById(providerId);
-            setProvider(foundProvider);
+            setProvider(foundProvider ?? null);
         }
     }, [params.id]);
 
@@ -166,7 +166,7 @@ export default function BookingPage() {
                 price: service.variations ? service.variations[0].price : service.price
             });
             
-            setBookingId(booking.id);
+            setBookingId(booking.id.toString());
             setBookingConfirmed(true);
         } catch (error) {
             console.error('Booking failed:', error);

@@ -35,7 +35,7 @@ export default function ProviderProfile() {
         if (params.id) {
             const providerId = parseInt(params.id as string);
             const foundProvider = getProviderById(providerId);
-            setProvider(foundProvider || null);
+            setProvider(foundProvider ?? null);
             if (foundProvider) {
                 setFavorite(foundProvider.favorite);
             }

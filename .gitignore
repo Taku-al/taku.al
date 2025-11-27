@@ -224,4 +224,6 @@ storybook-static
 
 # Misc
 *.tgz
-*.tar.gz 
+*.tar.gz
+
+package-lock.json

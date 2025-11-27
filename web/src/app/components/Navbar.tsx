@@ -10,6 +10,8 @@ export default function Navbar() {
     const [isScrolled, setIsScrolled] = useState(false);
     const pathname = usePathname();
     const onDashboard = pathname?.startsWith('/dashboard');
+    const onStaffDashboard = pathname?.startsWith('/staff');
+    const onAnyDashboard = onDashboard || onStaffDashboard;
 
     useEffect(() => {
         const handleScroll = () => {
@@ -21,7 +23,7 @@ export default function Navbar() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    const solid = onDashboard || isScrolled;
+    const solid = onAnyDashboard || isScrolled;
 
     return (
         <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${
@@ -39,7 +41,7 @@ export default function Navbar() {
                     </div>
 
                     {/* Desktop Navigation - Only show on non-dashboard pages */}
-                    {!onDashboard && (
+                    {!onAnyDashboard && (
                         <div className="hidden lg:flex items-center space-x-8">
                             <a href="#home" className={`px-4 py-2 text-sm font-medium transition-all duration-300 relative hover-underline ${
                                 solid ? 'text-gray-700 hover:text-blue-600' : 'text-white hover:text-blue-200'
@@ -66,7 +68,7 @@ export default function Navbar() {
 
                     {/* Right side - Different content based on page */}
                     <div className="hidden lg:flex items-center space-x-4">
-                        {onDashboard ? (
+                        {onAnyDashboard ? (
                             <>
                                 <Link href="/" className="flex items-center gap-2 text-gray-600 hover:text-blue-600 transition-colors">
                                     <ArrowLeft className="w-4 h-4" />
@@ -74,7 +76,7 @@ export default function Navbar() {
                                 </Link>
                                 <div className="flex items-center gap-2 text-gray-600">
                                     <User className="w-5 h-5" />
-                                    <span className="text-sm font-medium">My Account</span>
+                                    <span className="text-sm font-medium">{onStaffDashboard ? 'Staff Account' : 'My Account'}</span>
                                 </div>
                             </>
                         ) : (
@@ -109,7 +111,7 @@ export default function Navbar() {
                                 ? 'bg-white/95 border-gray-200'
                                 : 'bg-black/20 backdrop-blur-md border-white/20'
                         }`}>
-                            {!onDashboard ? (
+                            {!onAnyDashboard ? (
                                 <>
                                     <a href="#home" className={`block px-4 py-3 rounded-lg text-base font-medium transition-colors ${
                                         solid ? 'text-gray-700 hover:bg-gray-100' : 'text-white hover:bg-white/10'
@@ -153,7 +155,7 @@ export default function Navbar() {
                                     }`}>
                                         <div className="flex items-center gap-2">
                                             <User className="w-5 h-5" />
-                                            My Account
+                                            {onStaffDashboard ? 'Staff Account' : 'My Account'}
                                         </div>
                                     </div>
                                 </>

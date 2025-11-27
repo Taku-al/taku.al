@@ -1122,7 +1122,7 @@ export const createBooking = (bookingData: {
   const service = provider?.serviceCategories.flatMap(cat => cat.services).find(s => s.name === bookingData.serviceName);
   
   const newBooking: Booking = {
-    id: `booking_${Date.now()}`,
+    id: Date.now(),
     providerId: bookingData.providerId,
     providerName: provider?.name || "Unknown Provider",
     serviceName: bookingData.serviceName,
@@ -1132,6 +1132,7 @@ export const createBooking = (bookingData: {
     price: bookingData.price,
     status: "upcoming",
     location: provider?.location || "Unknown",
+    category: provider?.category || "Unknown",
     image: service?.image || provider?.images[0]?.url || "",
     rating: undefined,
     canRebook: false,
@@ -1142,4 +1143,320 @@ export const createBooking = (bookingData: {
   mockUserData.bookings.push(newBooking);
   
   return newBooking;
+};
+
+// Staff-specific interfaces and data
+export interface StaffAppointment {
+  id: number;
+  customerName: string;
+  customerEmail: string;
+  customerPhone: string;
+  serviceName: string;
+  date: string;
+  time: string;
+  duration: string;
+  price: number;
+  status: 'upcoming' | 'completed' | 'cancelled' | 'no-show';
+  notes?: string;
+  created: string;
+  customerImage: string;
+}
+
+export interface StaffStats {
+  todayAppointments: number;
+  weekAppointments: number;
+  monthAppointments: number;
+  todayEarnings: number;
+  weekEarnings: number;
+  monthEarnings: number;
+  totalClients: number;
+  repeatClients: number;
+  averageRating: number;
+  totalReviews: number;
+  completionRate: number;
+}
+
+export interface StaffSchedule {
+  dayOfWeek: string;
+  isOpen: boolean;
+  startTime: string;
+  endTime: string;
+  breaks: {
+    startTime: string;
+    endTime: string;
+  }[];
+}
+
+// Mock staff appointments (for the logged-in provider)
+export const mockStaffAppointments: StaffAppointment[] = [
+  {
+    id: 1,
+    customerName: "Sarah Mitchell",
+    customerEmail: "sarah.m@email.com",
+    customerPhone: "(555) 111-2222",
+    serviceName: "Signature Hydrating Facial",
+    date: "2024-01-15",
+    time: "2:00 PM",
+    duration: "60 min",
+    price: 85,
+    status: "upcoming",
+    notes: "First time client, prefers gentle products",
+    created: "2024-01-10",
+    customerImage: "https://i.pravatar.cc/150?img=1"
+  },
+  {
+    id: 2,
+    customerName: "Emily Rodriguez",
+    customerEmail: "emily.r@email.com",
+    customerPhone: "(555) 222-3333",
+    serviceName: "Swedish Relaxation Massage",
+    date: "2024-01-15",
+    time: "4:00 PM",
+    duration: "90 min",
+    price: 120,
+    status: "upcoming",
+    notes: "Regular client, prefers medium pressure",
+    created: "2024-01-12",
+    customerImage: "https://i.pravatar.cc/150?img=5"
+  },
+  {
+    id: 3,
+    customerName: "David Chen",
+    customerEmail: "david.c@email.com",
+    customerPhone: "(555) 333-4444",
+    serviceName: "Hot Stone Therapy",
+    date: "2024-01-16",
+    time: "10:00 AM",
+    duration: "90 min",
+    price: 140,
+    status: "upcoming",
+    created: "2024-01-13",
+    customerImage: "https://i.pravatar.cc/150?img=12"
+  },
+  {
+    id: 4,
+    customerName: "Jessica Thompson",
+    customerEmail: "jess.t@email.com",
+    customerPhone: "(555) 444-5555",
+    serviceName: "Anti-Aging Treatment",
+    date: "2024-01-16",
+    time: "2:30 PM",
+    duration: "75 min",
+    price: 125,
+    status: "upcoming",
+    created: "2024-01-14",
+    customerImage: "https://i.pravatar.cc/150?img=9"
+  },
+  {
+    id: 5,
+    customerName: "Michael Brown",
+    customerEmail: "m.brown@email.com",
+    customerPhone: "(555) 555-6666",
+    serviceName: "Signature Hydrating Facial",
+    date: "2024-01-17",
+    time: "11:00 AM",
+    duration: "60 min",
+    price: 85,
+    status: "upcoming",
+    created: "2024-01-15",
+    customerImage: "https://i.pravatar.cc/150?img=15"
+  },
+  {
+    id: 6,
+    customerName: "Amanda Wilson",
+    customerEmail: "amanda.w@email.com",
+    customerPhone: "(555) 666-7777",
+    serviceName: "Swedish Relaxation Massage",
+    date: "2024-01-12",
+    time: "3:00 PM",
+    duration: "90 min",
+    price: 120,
+    status: "completed",
+    notes: "Excellent session, client very satisfied",
+    created: "2024-01-08",
+    customerImage: "https://i.pravatar.cc/150?img=25"
+  },
+  {
+    id: 7,
+    customerName: "Robert Martinez",
+    customerEmail: "rob.m@email.com",
+    customerPhone: "(555) 777-8888",
+    serviceName: "Hot Stone Therapy",
+    date: "2024-01-11",
+    time: "1:00 PM",
+    duration: "90 min",
+    price: 140,
+    status: "completed",
+    created: "2024-01-05",
+    customerImage: "https://i.pravatar.cc/150?img=33"
+  },
+  {
+    id: 8,
+    customerName: "Lisa Anderson",
+    customerEmail: "lisa.a@email.com",
+    customerPhone: "(555) 888-9999",
+    serviceName: "Signature Hydrating Facial",
+    date: "2024-01-10",
+    time: "4:30 PM",
+    duration: "60 min",
+    price: 85,
+    status: "completed",
+    created: "2024-01-07",
+    customerImage: "https://i.pravatar.cc/150?img=20"
+  },
+  {
+    id: 9,
+    customerName: "James Taylor",
+    customerEmail: "james.t@email.com",
+    customerPhone: "(555) 999-0000",
+    serviceName: "Anti-Aging Treatment",
+    date: "2024-01-09",
+    time: "11:30 AM",
+    duration: "75 min",
+    price: 125,
+    status: "completed",
+    created: "2024-01-04",
+    customerImage: "https://i.pravatar.cc/150?img=52"
+  },
+  {
+    id: 10,
+    customerName: "Karen White",
+    customerEmail: "karen.w@email.com",
+    customerPhone: "(555) 000-1111",
+    serviceName: "Swedish Relaxation Massage",
+    date: "2024-01-08",
+    time: "2:00 PM",
+    duration: "90 min",
+    price: 120,
+    status: "no-show",
+    notes: "Client did not show up, no cancellation notice",
+    created: "2024-01-03",
+    customerImage: "https://i.pravatar.cc/150?img=45"
+  }
+];
+
+// Mock staff schedule
+export const mockStaffSchedule: StaffSchedule[] = [
+  {
+    dayOfWeek: "Monday",
+    isOpen: true,
+    startTime: "9:00 AM",
+    endTime: "8:00 PM",
+    breaks: [{ startTime: "12:00 PM", endTime: "1:00 PM" }]
+  },
+  {
+    dayOfWeek: "Tuesday",
+    isOpen: true,
+    startTime: "9:00 AM",
+    endTime: "8:00 PM",
+    breaks: [{ startTime: "12:00 PM", endTime: "1:00 PM" }]
+  },
+  {
+    dayOfWeek: "Wednesday",
+    isOpen: true,
+    startTime: "9:00 AM",
+    endTime: "8:00 PM",
+    breaks: [{ startTime: "12:00 PM", endTime: "1:00 PM" }]
+  },
+  {
+    dayOfWeek: "Thursday",
+    isOpen: true,
+    startTime: "9:00 AM",
+    endTime: "8:00 PM",
+    breaks: [{ startTime: "12:00 PM", endTime: "1:00 PM" }]
+  },
+  {
+    dayOfWeek: "Friday",
+    isOpen: true,
+    startTime: "9:00 AM",
+    endTime: "9:00 PM",
+    breaks: [{ startTime: "12:00 PM", endTime: "1:00 PM" }]
+  },
+  {
+    dayOfWeek: "Saturday",
+    isOpen: true,
+    startTime: "8:00 AM",
+    endTime: "9:00 PM",
+    breaks: [{ startTime: "12:00 PM", endTime: "1:00 PM" }]
+  },
+  {
+    dayOfWeek: "Sunday",
+    isOpen: true,
+    startTime: "10:00 AM",
+    endTime: "6:00 PM",
+    breaks: []
+  }
+];
+
+// Staff helper functions
+export const getStaffTodayAppointments = (): StaffAppointment[] => {
+  const today = new Date().toISOString().split('T')[0];
+  return mockStaffAppointments.filter(apt => 
+    apt.date === today && apt.status === 'upcoming'
+  );
+};
+
+export const getStaffUpcomingAppointments = (): StaffAppointment[] => {
+  const today = new Date();
+  return mockStaffAppointments
+    .filter(apt => new Date(apt.date) >= today && apt.status === 'upcoming')
+    .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+};
+
+export const getStaffCompletedAppointments = (): StaffAppointment[] => {
+  return mockStaffAppointments
+    .filter(apt => apt.status === 'completed')
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+};
+
+export const getStaffStats = (): StaffStats => {
+  const today = new Date();
+  const todayStr = today.toISOString().split('T')[0];
+  const weekStart = new Date(today);
+  weekStart.setDate(today.getDate() - 7);
+  const monthStart = new Date(today);
+  monthStart.setDate(today.getDate() - 30);
+
+  const todayApts = mockStaffAppointments.filter(apt => apt.date === todayStr);
+  const weekApts = mockStaffAppointments.filter(apt => new Date(apt.date) >= weekStart);
+  const monthApts = mockStaffAppointments.filter(apt => new Date(apt.date) >= monthStart);
+
+  const todayEarnings = todayApts.reduce((sum, apt) => sum + (apt.status === 'completed' ? apt.price : 0), 0);
+  const weekEarnings = weekApts.reduce((sum, apt) => sum + (apt.status === 'completed' ? apt.price : 0), 0);
+  const monthEarnings = monthApts.reduce((sum, apt) => sum + (apt.status === 'completed' ? apt.price : 0), 0);
+
+  const uniqueClients = new Set(mockStaffAppointments.map(apt => apt.customerEmail));
+  const clientAppointmentCounts = new Map<string, number>();
+  mockStaffAppointments.forEach(apt => {
+    clientAppointmentCounts.set(apt.customerEmail, (clientAppointmentCounts.get(apt.customerEmail) || 0) + 1);
+  });
+  const repeatClients = Array.from(clientAppointmentCounts.values()).filter(count => count > 1).length;
+
+  const completedCount = mockStaffAppointments.filter(apt => apt.status === 'completed').length;
+  const totalCount = mockStaffAppointments.length;
+
+  return {
+    todayAppointments: todayApts.length,
+    weekAppointments: weekApts.length,
+    monthAppointments: monthApts.length,
+    todayEarnings,
+    weekEarnings,
+    monthEarnings,
+    totalClients: uniqueClients.size,
+    repeatClients,
+    averageRating: 4.9,
+    totalReviews: 245,
+    completionRate: Math.round((completedCount / totalCount) * 100)
+  };
+};
+
+export const getStaffSchedule = (): StaffSchedule[] => {
+  return mockStaffSchedule;
+};
+
+export const updateAppointmentStatus = (appointmentId: number, newStatus: StaffAppointment['status']): void => {
+  const appointment = mockStaffAppointments.find(apt => apt.id === appointmentId);
+  if (appointment) {
+    appointment.status = newStatus;
+  }
 };
