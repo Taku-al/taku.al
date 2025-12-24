@@ -1,0 +1,20 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: taku-al-web:latest
+    container_name: taku-web
+    restart: unless-stopped
+    networks:
+      - taku-network
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:3000"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+networks:
+  taku-network:
+    name: taku-network
+    driver: bridge
